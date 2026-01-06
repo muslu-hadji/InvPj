@@ -176,3 +176,6 @@
 /workspaces/InvPj/obj/Debug/net10.0/InvPj.pdb
 /workspaces/InvPj/obj/Debug/net10.0/InvPj.genruntimeconfig.cache
 /workspaces/InvPj/obj/Debug/net10.0/ref/InvPj.dll
+/workspaces/InvPj/bin/Debug/net10.0/Microsoft.Extensions.Configuration.Binder.dll
+/workspaces/InvPj/bin/Debug/net10.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll
+/workspaces/InvPj/bin/Debug/net10.0/Telegram.Bot.dll

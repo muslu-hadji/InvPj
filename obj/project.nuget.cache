@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lAtIbg1oAuc=",
+  "dgSpecHash": "QgRgLr2ibvk=",
   "success": true,
   "projectFilePath": "/workspaces/InvPj/InvPj.csproj",
   "expectedPackageFiles": [
@@ -23,12 +23,14 @@
     "/home/codespace/.nuget/packages/microsoft.extensions.caching.abstractions/10.0.1/microsoft.extensions.caching.abstractions.10.0.1.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.extensions.caching.memory/10.0.1/microsoft.extensions.caching.memory.10.0.1.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.extensions.configuration.abstractions/10.0.1/microsoft.extensions.configuration.abstractions.10.0.1.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.extensions.configuration.binder/8.0.0/microsoft.extensions.configuration.binder.8.0.0.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.extensions.dependencyinjection/10.0.1/microsoft.extensions.dependencyinjection.10.0.1.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.1/microsoft.extensions.dependencyinjection.abstractions.10.0.1.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.extensions.dependencymodel/10.0.1/microsoft.extensions.dependencymodel.10.0.1.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.extensions.logging/10.0.1/microsoft.extensions.logging.10.0.1.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.extensions.logging.abstractions/10.0.1/microsoft.extensions.logging.abstractions.10.0.1.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.extensions.options/10.0.1/microsoft.extensions.options.10.0.1.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.extensions.options.configurationextensions/8.0.0/microsoft.extensions.options.configurationextensions.8.0.0.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.extensions.primitives/10.0.1/microsoft.extensions.primitives.10.0.1.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.net.stringtools/17.14.28/microsoft.net.stringtools.17.14.28.nupkg.sha512",
     "/home/codespace/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
@@ -51,7 +53,8 @@
     "/home/codespace/.nuget/packages/system.security.cryptography.protecteddata/9.0.0/system.security.cryptography.protecteddata.9.0.0.nupkg.sha512",
     "/home/codespace/.nuget/packages/system.security.cryptography.xml/9.0.0/system.security.cryptography.xml.9.0.0.nupkg.sha512",
     "/home/codespace/.nuget/packages/system.security.permissions/9.0.0/system.security.permissions.9.0.0.nupkg.sha512",
-    "/home/codespace/.nuget/packages/system.windows.extensions/9.0.0/system.windows.extensions.9.0.0.nupkg.sha512"
+    "/home/codespace/.nuget/packages/system.windows.extensions/9.0.0/system.windows.extensions.9.0.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/telegram.bot/22.8.1/telegram.bot.22.8.1.nupkg.sha512"
   ],
   "logs": []
 }

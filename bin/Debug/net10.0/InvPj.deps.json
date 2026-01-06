@@ -9,7 +9,8 @@
       "InvPj/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Design": "10.0.1",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.0"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.0",
+          "Telegram.Bot": "22.8.1"
         },
         "runtime": {
           "InvPj.dll": {}
@@ -466,6 +467,17 @@
           }
         }
       },
+      "Microsoft.Extensions.Configuration.Binder/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.1"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Configuration.Binder.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      },
       "Microsoft.Extensions.DependencyInjection/10.0.1": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.1"
@@ -526,6 +538,21 @@
           "lib/net10.0/Microsoft.Extensions.Options.dll": {
             "assemblyVersion": "10.0.0.0",
             "fileVersion": "10.0.125.57005"
+          }
+        }
+      },
+      "Microsoft.Extensions.Options.ConfigurationExtensions/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.1",
+          "Microsoft.Extensions.Configuration.Binder": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.1",
+          "Microsoft.Extensions.Options": "10.0.1",
+          "Microsoft.Extensions.Primitives": "10.0.1"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
           }
         }
       },
@@ -778,6 +805,17 @@
             "fileVersion": "9.0.24.52809"
           }
         }
+      },
+      "Telegram.Bot/22.8.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Options.ConfigurationExtensions": "8.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Telegram.Bot.dll": {
+            "assemblyVersion": "22.8.1.0",
+            "fileVersion": "22.8.1.0"
+          }
+        }
       }
     }
   },
@@ -906,6 +944,13 @@
       "path": "microsoft.extensions.configuration.abstractions/10.0.1",
       "hashPath": "microsoft.extensions.configuration.abstractions.10.0.1.nupkg.sha512"
     },
+    "Microsoft.Extensions.Configuration.Binder/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mBMoXLsr5s1y2zOHWmKsE9veDcx8h1x/c3rz4baEdQKTeDcmQAPNbB54Pi/lhFO3K431eEq6PFbMgLaa6PHFfA==",
+      "path": "microsoft.extensions.configuration.binder/8.0.0",
+      "hashPath": "microsoft.extensions.configuration.binder.8.0.0.nupkg.sha512"
+    },
     "Microsoft.Extensions.DependencyInjection/10.0.1": {
       "type": "package",
       "serviceable": true,
@@ -947,6 +992,13 @@
       "sha512": "sha512-G6VVwywpJI4XIobetGHwg7wDOYC2L2XBYdtskxLaKF/Ynb5QBwLl7Q//wxAR2aVCLkMpoQrjSP9VoORkyddsNQ==",
       "path": "microsoft.extensions.options/10.0.1",
       "hashPath": "microsoft.extensions.options.10.0.1.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Options.ConfigurationExtensions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0f4DMRqEd50zQh+UyJc+/HiBsZ3vhAQALgdkcQEalSH1L2isdC7Yj54M3cyo5e+BeO5fcBQ7Dxly8XiBBcvRgw==",
+      "path": "microsoft.extensions.options.configurationextensions/8.0.0",
+      "hashPath": "microsoft.extensions.options.configurationextensions.8.0.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Primitives/10.0.1": {
       "type": "package",
@@ -1108,6 +1160,13 @@
       "sha512": "sha512-U9msthvnH2Fsw7xwAvIhNHOdnIjOQTwOc8Vd0oGOsiRcGMGoBFlUD6qtYawRUoQdKH9ysxesZ9juFElt1Jw/7A==",
       "path": "system.windows.extensions/9.0.0",
       "hashPath": "system.windows.extensions.9.0.0.nupkg.sha512"
+    },
+    "Telegram.Bot/22.8.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-noNl83CXnTgeZRmbJv512X2CZmu+bLDGDGyDC6HH1XErvHWrfTn5KPCtqwGGXjRRSUb9LAHmXwR1GC3NrGZOJA==",
+      "path": "telegram.bot/22.8.1",
+      "hashPath": "telegram.bot.22.8.1.nupkg.sha512"
     }
   }
 }
