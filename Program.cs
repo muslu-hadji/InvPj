@@ -58,53 +58,38 @@ class Program {
                 try {
                     string cmd = args[0].ToLower();
                     if (cmd == "/start") {
-                        await bot.SendMessage(chatId, "💰 Финтех-система готова!\n\nКоманды:\n/add_investor Имя Сумма\n/status\n/new_deal Название Сумма Наценка", cancellationToken: ct);
-                    }
-                    else if (cmd == "/add_investor" && args.Length == 3) {
-                        var name = args[1];
-                        if (decimal.TryParse(args[2], out decimal balance)) {
-                            db.Investors.Add(new Investor { Name = name, AvailableBalance = balance });
-                            await db.SaveChangesAsync();
-                            await bot.SendMessage(chatId, $"✅ Инвестор {name} успешно добавлен!", cancellationToken: ct);
-                        }
+                        await bot.SendMessage(chatId, "💎 ГЛАВНОЕ МЕНЮ:\n/status — Балансы\n/deals — Список сделок\n/pay [ID] [Сумма] — Внести оплату\n/add_investor [Имя] [Сумма]\n/new_deal [Название] [Сумма] [Наценка]", cancellationToken: ct);
                     }
                     else if (cmd == "/status") {
                         var invs = db.Investors.ToList();
-                        if (invs.Count == 0) {
-                            await bot.SendMessage(chatId, "В базе пока нет инвесторов.", cancellationToken: ct);
-                        } else {
-                            var report = "📊 ТЕКУЩИЕ БАЛАНСЫ:\n" + string.Join("\n", invs.Select(i => $"👤 {i.Name}: {i.AvailableBalance:N0} руб."));
-                            await bot.SendMessage(chatId, report, cancellationToken: ct);
-                        }
+                        await bot.SendMessage(chatId, "📊 БАЛАНСЫ:\n" + string.Join("\n", invs.Select(i => $"👤 {i.Name}: {i.AvailableBalance:N0} (Прибыль: {i.TotalEarned:N0})")), cancellationToken: ct);
                     }
-                    else if (cmd == "/new_deal" && args.Length == 4) {
-                        string title = args[1];
-                        decimal amount = decimal.Parse(args[2]);
-                        decimal markup = decimal.Parse(args[3]);
-                        
-                        var totalAvailable = db.Investors.Sum(i => i.AvailableBalance);
-                        if (totalAvailable < amount) {
-                            await bot.SendMessage(chatId, $"❌ Недостаточно средств! В пуле всего {totalAvailable:N0} руб., а нужно {amount:N0}.", cancellationToken: ct);
-                            return;
-                        }
-
-                        var deal = new Deal { Title = title, PrincipalAmount = amount, MarkupAmount = markup, RemainingDebt = amount + markup };
-                        db.Deals.Add(deal);
-                        await db.SaveChangesAsync();
-
-                        foreach (var inv in db.Investors.Where(i => i.AvailableBalance > 0).ToList()) {
-                            decimal share = inv.AvailableBalance / totalAvailable;
-                            decimal contribution = amount * share;
-                            db.Contributions.Add(new DealContribution { DealId = deal.Id, InvestorId = inv.Id, SharePercentage = share, AmountInvested = contribution });
-                            inv.AvailableBalance -= contribution;
-                            inv.InvestedAmount += contribution;
-                        }
-                        await db.SaveChangesAsync();
-                        await bot.SendMessage(chatId, $"🚀 Сделка '{title}' на {amount:N0} руб. создана!\nСумма распределена между всеми инвесторами.", cancellationToken: ct);
+                    else if (cmd == "/deals") {
+                        var deals = db.Deals.Where(d => d.RemainingDebt > 0).ToList();
+                        await bot.SendMessage(chatId, "📝 СДЕЛКИ:\n" + (deals.Count == 0 ? "Нет активных" : string.Join("\n", deals.Select(d => $"ID: {d.Id} | {d.Title} | Долг: {d.RemainingDebt:N0}"))), cancellationToken: ct);
                     }
-                } catch (Exception ex) {
-                    await bot.SendMessage(chatId, "⚠️ Ошибка обработки. Проверь, что вводишь числа без пробелов внутри (например, 15000 вместо 15 000).", cancellationToken: ct);
-                }
+                    else if (cmd == "/pay" && args.Length == 3) {
+                        int dId = int.Parse(args[1]);
+                        decimal sum = decimal.Parse(args[2]);
+                        var deal = db.Deals.Find(dId);
+                        if (deal == null) { await bot.SendMessage(chatId, "❌ Сделка не найдена", cancellationToken: ct); return; }
+
+                        decimal total = deal.PrincipalAmount + deal.MarkupAmount;
+                        decimal pRatio = deal.PrincipalAmount / total;
+                        decimal pPart = sum * pRatio;
+                        decimal profit = sum - pPart;
+
+                        var conts = db.Contributions.Include(c => c.Investor).Where(c => c.DealId == dId).ToList();
+                        foreach (var c in conts) {
+                            decimal invProfit = profit * 0.8m * c.SharePercentage;
+                            c.Investor!.AvailableBalance += (pPart * c.SharePercentage) + invProfit;
+                            c.Investor.TotalEarned += invProfit;
+                        }
+                        deal.RemainingDebt -= sum;
+                        await db.SaveChangesAsync();
+                        await bot.SendMessage(chatId, $"💰 Платеж {sum:N0} принят!", cancellationToken: ct);
+                    }
+                } catch { await bot.SendMessage(chatId, "⚠️ Ошибка! Проверь формат команды.", cancellationToken: ct); }
             },
             (bot, ex, ct) => Task.CompletedTask,
             new ReceiverOptions { AllowedUpdates = [] },
