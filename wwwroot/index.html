@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>MyInv Mobile</title>
+                <script src="https://telegram.org/js/telegram-web-app.js"></script>
+                    <style>
+                            body { font-family: sans-serif; background: #f0f2f5; color: #333; margin: 0; padding: 20px; }
+                                    .card { background: white; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+                                            h1 { font-size: 20px; color: #0088cc; }
+                                                    .balance { font-size: 24px; font-weight: bold; margin: 10px 0; }
+                                                            .btn { background: #0088cc; color: white; border: none; padding: 10px 20px; border-radius: 10px; width: 100%; font-size: 16px; cursor: pointer; }
+                                                                </style>
+                                                                </head>
+                                                                <body>
+                                                                    <h1>💎 Мои Инвестиции</h1>
+                                                                        
+                                                                            <div class="card">
+                                                                                    <p>Общий баланс</p>
+                                                                                            <div class="balance" id="main-balance">Загрузка...</div>
+                                                                                                </div>
+
+                                                                                                    <button class="btn" onclick="Telegram.WebApp.close()">Закрыть приложение</button>
+
+                                                                                                        <script>
+                                                                                                                // Инициализация Telegram WebApp
+                                                                                                                        let tg = window.Telegram.WebApp;
+                                                                                                                                tg.expand(); // Развернуть на весь экран
+                                                                                                                                        
+                                                                                                                                                // Пока просто имитируем данные, позже подключим к базе
+                                                                                                                                                        document.getElementById('main-balance').innerText = "115,860 руб.";
+                                                                                                                                                            </script>
+                                                                                                                                                            </body>
+                                                                                                                                                            </html>
