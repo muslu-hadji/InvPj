@@ -1,48 +1,46 @@
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Telegram.Bot;
-using Telegram.Bot.Types;
-using Telegram.Bot.Types.ReplyMarkups;
+using Microsoft.Extensions.DependencyInjection;
 
-var builder = WebApplication.CreateBuilder();
+var builder = WebApplication.CreateBuilder(args);
 
-// РАЗРЕШАЕМ ВСЁ (CORS)
-builder.Services.AddCors(options => {
-    options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-});
+// Добавляем CORS
+builder.Services.AddCors(options => 
+    options.AddDefaultPolicy(p => 
+        p.AllowAnyOrigin()
+         .AllowAnyHeader()
+         .AllowAnyMethod()));
+
+// Добавляем DbContext
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql("Host=127.0.0.1;Database=invest_db;Username=postgres"));
 
 var app = builder.Build();
 
-app.UseCors(); // Применяем разрешение
+app.UseCors();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.MapGet("/api/balance", async () => {
-    try {
-        using var db = new AppDbContext();
-        var total = await db.Investors.SumAsync(i => i.AvailableBalance);
-        return Results.Ok(new { totalBalance = total });
-    } catch {
-        return Results.Ok(new { totalBalance = 0 });
-    }
+// Endpoint для получения баланса
+app.MapGet("/api/balance", async (AppDbContext db) => {
+    await db.Database.EnsureCreatedAsync();
+    var total = await db.Investors.SumAsync(i => (decimal?)i.AvailableBalance) ?? 0;
+    return Results.Ok(new { totalBalance = total });
 });
 
-var botClient = new TelegramBotClient("8551799916:AAH7PdzEJhpzAcFV6eEgqCjTV_7rb4rBYh4");
+// Endpoint для добавления инвестора
+app.MapPost("/api/investors", async (Investor inv, AppDbContext db) => {
+    db.Investors.Add(inv);
+    await db.SaveChangesAsync();
+    return Results.Ok(new { message = "Investor added", investorId = inv.Id });
+});
 
-_ = Task.Run(() => botClient.StartReceiving(
-    async (bot, update, ct) => {
-        if (update.Message?.Text == "/start") {
-            var host = Environment.GetEnvironmentVariable("CODESPACE_NAME");
-            var url = $"https://{host}-5000.app.github.dev/";
-            var kb = new ReplyKeyboardMarkup(new[] {
-                new KeyboardButton("📱 Открыть приложение") { WebApp = new WebAppInfo { Url = url } }
-            }) { ResizeKeyboard = true };
-            await bot.SendTextMessageAsync(update.Message.Chat.Id, "Обновлено! Открывай:", replyMarkup: kb);
-        }
-    },
-    (bot, ex, ct) => Task.CompletedTask
-));
+// Endpoint для получения всех инвесторов
+app.MapGet("/api/investors", async (AppDbContext db) => {
+    var investors = await db.Investors.ToListAsync();
+    return Results.Ok(investors);
+});
 
 await app.RunAsync("http://0.0.0.0:5000");
 
@@ -53,7 +51,6 @@ public class Investor {
 }
 
 public class AppDbContext : DbContext {
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
     public DbSet<Investor> Investors => Set<Investor>();
-    protected override void OnConfiguring(DbContextOptionsBuilder options) =>
-        options.UseNpgsql("Host=localhost;Database=inv_db;Username=postgres;Password=my_password");
 }
