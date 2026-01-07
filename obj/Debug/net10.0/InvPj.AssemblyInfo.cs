@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InvPj")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07055c6552fa0f64e2fbefc2fbbdbd7bf4781c95")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a2a9a075013df55f5e5a8885f9dd633a25611b7")]
 [assembly: System.Reflection.AssemblyProductAttribute("InvPj")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InvPj")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
