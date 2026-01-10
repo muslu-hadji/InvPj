@@ -12,14 +12,12 @@ namespace InvPj.Services
         {
             _context = context;
         }
-
         // НОВЫЙ МЕТОД: Заменяет вашу JS функцию load()
         public async Task<decimal> GetTotalBalanceAsync()
         {
-            // Суммируем баланс всех инвесторов из таблицы Investors
-            return await _context.Investors.SumAsync(i => i.AvailableBalance);
+            // Читаем сумму из таблицы инвестиций, а не инвесторов
+            return await _context.Investments.SumAsync(i => i.Amount); 
         }
-
         // Метод группировки для страницы Breakdown
         public async Task<List<InvestorTotal>> GetInvestmentBreakdownAsync()
         {

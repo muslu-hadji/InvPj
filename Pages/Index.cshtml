@@ -6,6 +6,7 @@
 <h1>Добавить инвестицию (Razor Pages)</h1>
 
 <form method="post">
+ @Html.AntiForgeryToken() 
     <div class="form-group">
         <label asp-for="NewInvestment.InvestorName">Имя инвестора</label>
         <input asp-for="NewInvestment.InvestorName" class="form-control" />

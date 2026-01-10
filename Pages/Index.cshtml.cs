@@ -43,12 +43,24 @@ namespace InvPj.Pages
                 }
                 return Page(); // <-- Возвращает при ошибке валидации
             }
-       
+            if (NewInvestment == null) // Проверяем, почему он может быть null
+            {
+                Console.WriteLine("DEBUG: NewInvestment object is NULL after form submission!");
+                return Page();
+            }
+                else
+            {
+                Console.WriteLine($"DEBUG: NewInvestment Amount: {NewInvestment.Amount}, Name: {NewInvestment.InvestorName}");
+            }
+            if (NewInvestment != null) // Добавьте эту проверку
+            {
             // !!! КОД УСПЕШНОГО ВЫПОЛНЕНИЯ !!!
             // Если валидация прошла успешно, мы должны сохранить данные и перенаправить
             _context.Investments.Add(NewInvestment);
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index"); // <-- Возвращает при успехе
+            }   
+            return Page(); // <-- Возвращает, если NewInvestment равен null
         }
     }
 }
