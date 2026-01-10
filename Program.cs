@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using InvPj.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,10 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql("Host=127.0.0.1;Database=invest_db;Username=postgres;Password=my_app_password"));
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); // Или ваша строка подключения напрямую
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
 var app = builder.Build();
 
