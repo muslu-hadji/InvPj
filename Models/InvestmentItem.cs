@@ -3,7 +3,8 @@ namespace InvPj.Models // Убедитесь, что namespace совпадае�
     public class InvestmentItem
     {
         public int Id { get; set; } // Первичный ключ
-        public required string Name { get; set; } // Поле "Имя"
+        public required string InvestorName { get; set; } // Поле "Имя"
         public decimal Amount { get; set; } // Поле "Сумма (Р)"
     }
 }
+

@@ -1,0 +1,28 @@
+@page
+@model InvPj.Pages.BreakdownModel
+@{
+    ViewData["Title"] = "Разбивка по инвесторам";
+}
+
+<h1>Разбивка инвестиций по инвесторам</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Имя инвестора</th>
+            <th>Всего инвестировано</th>
+            <th>Количество инвестиций</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.InvestorBreakdown)
+        {
+            <tr>
+                <td>@item.InvestorName</td>
+                <td>@item.TotalAmountInvested.ToString("C")</td> <!-- Форматируем как валюту -->
+                <td>@item.NumberOfInvestments</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

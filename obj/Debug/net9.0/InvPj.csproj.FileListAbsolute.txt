@@ -118,4 +118,8 @@
 /workspaces/InvPj/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /workspaces/InvPj/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /workspaces/InvPj/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
-/workspaces/InvPj/obj/Debug/net9.0/compressed/vua3wemi32-{0}-t40c86iue9-t40c86iue9.gz
+/workspaces/InvPj/bin/Debug/net9.0/dotnet-tools.json
+/workspaces/InvPj/bin/Debug/net9.0/Appsettings.json
+/workspaces/InvPj/obj/Debug/net9.0/InvPj.RazorAssemblyInfo.cache
+/workspaces/InvPj/obj/Debug/net9.0/InvPj.RazorAssemblyInfo.cs
+/workspaces/InvPj/obj/Debug/net9.0/compressed/9v87zxrh4g-{0}-t40c86iue9-t40c86iue9.gz

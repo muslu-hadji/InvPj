@@ -9,8 +9,11 @@ namespace InvPj.Data // Это ваш корневой namespace
             : base(options)
         {
         }
-
-        // Добавьте DbSet для вашей модели InvestmentItem
-        public DbSet<InvestmentItem> InvestmentItems { get; set; }
+        public DbSet<Investor> Investors { get; set; }
+        
+        // Добавьте DbSet для InvestmentItem и Investment
+        public DbSet<InvestmentItem> Investments { get; set; }
+        //public DbSet<Investment> Investments { get; set; } \
+        
     }
 }
